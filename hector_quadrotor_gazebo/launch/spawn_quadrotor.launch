@@ -10,12 +10,12 @@
     "/>
   <arg name="tf_prefix" default="$(optenv ROS_NAMESPACE)"/>
 
-  <arg name="x" default="0.0"/>
+  <arg name="x" default="1.0"/>
   <arg name="y" default="0.0"/>
-  <arg name="z" default="0.3"/>
+  <arg name="z" default="0.5"/>
 
-  <arg name="use_ground_truth_for_tf" default="true" />
-  <arg name="use_ground_truth_for_control" default="true" />
+  <arg name="use_ground_truth_for_tf" default="false" />
+  <arg name="use_ground_truth_for_control" default="false" />
   <arg name="use_pose_estimation" if="$(arg use_ground_truth_for_control)" default="false"/>
   <arg name="use_pose_estimation" unless="$(arg use_ground_truth_for_control)" default="true"/>
 
