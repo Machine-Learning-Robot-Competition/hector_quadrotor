@@ -43,17 +43,17 @@ QuadrotorPoseEstimationNode::~QuadrotorPoseEstimationNode()
 
 bool QuadrotorPoseEstimationNode::init() {
   if (!PoseEstimationNode::init()) return false;
-  baro_subscriber_ = getNodeHandle().subscribe("altimeter", 10, &QuadrotorPoseEstimationNode::baroCallback, this);
+  baro_subscriber_ = getNodeHandle().subscribe("fix_velocity", 10, &QuadrotorPoseEstimationNode::baroCallback, this);
   height_subscriber_.shutdown();
   return true;
 }
 
-void QuadrotorPoseEstimationNode::baroCallback(const hector_uav_msgs::AltimeterConstPtr& altimeter) {
-  pose_estimation_->getMeasurement("baro")->add(Baro::Update(altimeter->pressure, altimeter->qnh));
+void QuadrotorPoseEstimationNode::baroCallback(const geometry_msgs::Vector3StampedConstPtr& altimeter) {
+  pose_estimation_->getMeasurement("baro")->add(Baro::Update(1.0, 1.0));
 
   if (sensor_pose_publisher_) {
     boost::shared_ptr<Baro> baro = boost::static_pointer_cast<Baro>(pose_estimation_->getMeasurement("baro"));
-    sensor_pose_.pose.position.z = baro->getModel()->getAltitude(Baro::Update(altimeter->pressure, altimeter->qnh)) - baro->getElevation();
+    sensor_pose_.pose.position.z = baro->getModel()->getAltitude(Baro::Update(1.0, 1.0)) - baro->getElevation();
   }
 }
 
