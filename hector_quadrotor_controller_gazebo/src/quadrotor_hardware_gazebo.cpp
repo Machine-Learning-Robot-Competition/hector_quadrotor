@@ -73,6 +73,9 @@ bool QuadrotorHardwareSim::initSim(
   // subscribe state
   std::string state_topic;
   model_nh.getParam("state_topic", state_topic);
+
+  ROS_INFO("State topic is /%s", state_topic.c_str());
+
   if (!state_topic.empty())
   {
     odom_sub_helper_ = boost::make_shared<OdomSubscriberHelper>(model_nh, state_topic, boost::ref(pose_),

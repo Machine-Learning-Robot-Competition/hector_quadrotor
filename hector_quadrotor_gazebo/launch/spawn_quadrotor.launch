@@ -4,15 +4,17 @@
   <arg name="name" default="quadrotor"/>
   <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro"/>
   <arg name="controllers" default="
-    controller/position
     controller/velocity
     controller/attitude
     "/>
   <arg name="tf_prefix" default="$(optenv ROS_NAMESPACE)"/>
 
-  <arg name="x" default="1.0"/>
+  <arg name="x" default="0.0"/>
   <arg name="y" default="0.0"/>
-  <arg name="z" default="0.5"/>
+  <arg name="z" default="0.0"/>
+  <arg name="R" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="Y" default="0.0"/>
 
   <arg name="use_ground_truth_for_tf" default="false" />
   <arg name="use_ground_truth_for_control" default="false" />
@@ -43,8 +45,8 @@
     <param name="tf_prefix" value="$(arg tf_prefix)/ground_truth" unless="$(arg use_ground_truth_for_tf)" />
   </node>
   <group if="$(arg use_pose_estimation)">
-    <node name="pose_estimation" pkg="hector_quadrotor_pose_estimation" type="hector_quadrotor_pose_estimation" output="screen">
-      <rosparam file="$(find hector_quadrotor_pose_estimation)/params/simulation.yaml" />
+    <node name="pose_estimation" pkg="hector_pose_estimation" type="pose_estimation" output="screen">
+      <!-- <rosparam file="$(find hector_pose_estimation)/params/simulation.yaml" /> -->
       <param name="nav_frame" value="$(arg tf_prefix)/nav" />
       <param name="publish_world_nav_transform" value="true" />
       <param name="tf_prefix" value="$(arg tf_prefix)" unless="$(arg use_ground_truth_for_tf)" />
@@ -82,6 +84,9 @@
            -x $(arg x)
            -y $(arg y)
            -z $(arg z)
+           -R $(arg R)
+           -P $(arg P)
+           -Y $(arg Y)
            -model $(arg name)"
         respawn="false" output="screen"/>
 
