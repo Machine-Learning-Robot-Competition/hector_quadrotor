@@ -44,7 +44,7 @@ public:
   virtual bool init();
 
 protected:
-  void baroCallback(const geometry_msgs::Vector3StampedConstPtr& altimeter);
+  void baroCallback(const hector_uav_msgs::AltimeterConstPtr& altimeter);
 
 private:
   ros::Subscriber baro_subscriber_;
