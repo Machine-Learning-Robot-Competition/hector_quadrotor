@@ -12,7 +12,7 @@
     
     <!-- Forward facing camera -->
     <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera_plus.urdf.xacro" />
-    <xacro:generic_camera name="front_cam" parent="base_link" ros_topic="camera/image" cam_info_topic="camera/camera_info" update_rate="10" res_x="960" res_y="720" image_format="R8G8B8" hfov="90">
+    <xacro:generic_camera name="front_cam" parent="base_link" ros_topic="camera/image" cam_info_topic="camera/camera_info" update_rate="10" res_x="1280" res_y="960" image_format="R8G8B8" hfov="90">
       <origin xyz="0.05 0.0 -0.06" rpy="0 0.5890 0"/>  <!-- PI / 4 = 0.78539 = 45deg -->
     </xacro:generic_camera>
 </robot>
