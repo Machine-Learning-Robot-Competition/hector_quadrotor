@@ -15,4 +15,59 @@
     <xacro:generic_camera name="front_cam" parent="base_link" ros_topic="camera/image" cam_info_topic="camera/camera_info" update_rate="10" res_x="640" res_y="480" image_format="R8G8B8" hfov="90">
       <origin xyz="-0.05 0.0 -0.06" rpy="0 0.78539 0"/>  <!-- PI / 4 = 0.78539 = 45deg -->
     </xacro:generic_camera>
+
+    <gazebo reference="base_link">
+        <!-- Combined Depth and RGB Camera Sensor -->
+        <sensor type="depth" name="combined_camera">
+            <update_rate>20.0</update_rate>
+
+            <!-- Set pose to point the camera downwards -->
+            <pose>0 0 0 0 1.05 0</pose> <!-- x y z roll pitch yaw -->
+            <camera>
+                <horizontal_fov>1.047</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format> <!-- This should allow the camera to capture RGB images -->
+                </image>
+                <clip>
+                    <near>0.5</near>
+                    <far>3.0</far>
+                </clip>
+            </camera>
+            <plugin name="combined_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+                <baseline>0.2</baseline>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>1.0</updateRate>
+                <cameraName>depth_camera</cameraName>
+
+                <!-- RGB image topic -->
+                <imageTopicName>/B1/rgbd_camera/rgb/image_raw</imageTopicName>
+                <cameraInfoTopicName>/B1/rgbd_camera/rgb/camera_info</cameraInfoTopicName>
+
+                <!-- Depth image topics -->
+                <depthImageTopicName>/B1/rgbd_camera/depth/image_raw</depthImageTopicName>
+                <depthImageInfoTopicName>/B1/rgbd_camera/depth/camera_info</depthImageInfoTopicName>
+                
+                <!-- Point cloud topic -->
+                <pointCloudTopicName>/B1/rgbd_camera/depth/points</pointCloudTopicName>
+
+                <frameName>camera_link</frameName>
+                <pointCloudCutoff>0.5</pointCloudCutoff>
+                <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+                
+                <!-- Optional distortion and camera parameters -->
+                <distortionK1>0.00000001</distortionK1>
+                <distortionK2>0.00000001</distortionK2>
+                <distortionK3>0.00000001</distortionK3>
+                <distortionT1>0.00000001</distortionT1>
+                <distortionT2>0.00000001</distortionT2>
+                <CxPrime>0</CxPrime>
+                <Cx>0</Cx>
+                <Cy>0</Cy>
+                <focalLength>0</focalLength>
+                <hackBaseline>0</hackBaseline>
+            </plugin>
+        </sensor>
+    </gazebo>
 </robot>
