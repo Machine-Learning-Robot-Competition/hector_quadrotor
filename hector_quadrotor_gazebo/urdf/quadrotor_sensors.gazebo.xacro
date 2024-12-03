@@ -61,6 +61,15 @@
             <velocityDrift>0 0 0</velocityDrift>
             <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
           </plugin>
+        
+          <!-- DELETE FOR COMP -->
+          <plugin name="quadrotor_groundtruth_sim" filename="libgazebo_ros_p3d.so">
+            <updateRate>100.0</updateRate>
+            <bodyName>base_link</bodyName>
+            <topicName>ground_truth/state</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <frameName>$(arg world_frame)</frameName>
+          </plugin>
 
         </gazebo>
   </xacro:macro>
