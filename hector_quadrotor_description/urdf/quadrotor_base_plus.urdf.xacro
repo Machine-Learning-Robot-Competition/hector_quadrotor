@@ -29,10 +29,81 @@
       </collision>
     </link>
 
-    <!-- Sonar height sensor -->
-    <xacro:sonar_sensor name="sonar" parent="base_link" ros_topic="sonar_height" update_rate="10" min_range="0.03" max_range="3.0" field_of_view="${40*pi/180}" ray_count="3">
-      <origin xyz="-0.16 0.0 -0.012" rpy="0 ${90*pi/180} 0"/>
-    </xacro:sonar_sensor>
+    <!-- Fixed Joint from Core to Rod -->
+    <joint name="core_to_rod" type="fixed">
+        <parent link="base_link"/>
+        <child link="rod_link"/>
+        <origin xyz="0.05 0 0" rpy="0 0 0"/> <!-- Adjust offset as needed -->
+    </joint>
+
+    <!-- Rod Link -->
+    <link name="rod_link">
+        <visual>
+        <geometry>
+            <cylinder length="0.06" radius="0.005"/> <!-- Thin rod -->
+        </geometry>
+        <material name="black"/>
+        </visual>
+        <inertial>
+            <mass value="0.01" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+
+    <!-- Fixed Joint from Rod to Camera -->
+    <joint name="rod_to_camera" type="fixed">
+        <parent link="rod_link"/>
+        <child link="camera_link"/>
+        <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Camera Link -->
+    <link name="camera_link">
+        <inertial>
+            <mass value="0.01" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+
+        <!-- Fixed Joint from Core to Rod -->
+    <joint name="core_to_depth_camera_rod" type="fixed">
+        <parent link="base_link"/>
+        <child link="depth_camera_rod_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/> 
+    </joint>
+
+        <!-- Rod Link -->
+    <link name="depth_camera_rod_link">
+        <visual>
+        <geometry>
+            <cylinder length="0.03" radius="0.005"/> <!-- Thin rod -->
+        </geometry>
+        <material name="black"/>
+        </visual>
+        <inertial>
+            <mass value="0.01" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
+
+    <!-- Fixed Joint from Rod to Camera -->
+    <joint name="rod_to_depth_camera" type="fixed">
+        <parent link="depth_camera_rod_link"/>
+        <child link="depth_camera_link"/>
+        <origin xyz="0 0 -0.03" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Camera Link -->
+    <link name="depth_camera_link">
+        <inertial>
+            <mass value="0.01" />
+            <origin xyz="0 0 0" />
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+      </inertial>
+    </link>
 
   </xacro:macro>
 </robot>
