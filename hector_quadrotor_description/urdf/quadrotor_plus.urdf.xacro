@@ -17,7 +17,7 @@
     </xacro:generic_camera>
 
     <joint name="depth_camera_joint" type="fixed">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.01" rpy="0 1.05 0"/>
         <parent link="depth_camera_link"/>
         <child link="depth_camera_optical_link"/>
     </joint>
@@ -52,9 +52,14 @@
                     <format>R8G8B8</format> <!-- This should allow the camera to capture RGB images -->
                 </image>
                 <clip>
-                    <near>0.5</near>
-                    <far>3.0</far>
+                    <near>0.02</near>
+                    <far>300</far>
                 </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
             </camera>
             <plugin name="combined_camera_controller" filename="libgazebo_ros_openni_kinect.so">
                 <baseline>0.2</baseline>
