@@ -40,7 +40,7 @@
     <link name="rod_link">
         <visual>
         <geometry>
-            <cylinder length="0.06" radius="0.005"/> <!-- Thin rod -->
+            <cylinder length="0.05" radius="0.005"/> <!-- Thin rod -->
         </geometry>
         <material name="black"/>
         </visual>
@@ -55,7 +55,7 @@
     <joint name="rod_to_camera" type="fixed">
         <parent link="rod_link"/>
         <child link="camera_link"/>
-        <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.04" rpy="0 0 0"/>
     </joint>
 
     <!-- Camera Link -->
@@ -78,7 +78,7 @@
     <link name="depth_camera_rod_link">
         <visual>
         <geometry>
-            <cylinder length="0.03" radius="0.005"/> <!-- Thin rod -->
+            <cylinder length="0.02" radius="0.005"/> <!-- Thin rod -->
         </geometry>
         <material name="black"/>
         </visual>
@@ -93,7 +93,7 @@
     <joint name="rod_to_depth_camera" type="fixed">
         <parent link="depth_camera_rod_link"/>
         <child link="depth_camera_link"/>
-        <origin xyz="0 0 -0.03" rpy="0 0 0"/>
+        <origin xyz="0 0 -0.02" rpy="0 0 0"/>
     </joint>
 
     <!-- Camera Link -->
