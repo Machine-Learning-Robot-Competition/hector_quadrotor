@@ -19,6 +19,14 @@
 
           </plugin>
 
+        <!-- <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+            <robotNamespace>/</robotNamespace>
+            <bodyName>base_link</bodyName>
+            <topicName>/imu/data</topicName>
+            <gaussianNoise>0.0</gaussianNoise>
+            <updateRate>100.0</updateRate>
+        </plugin> -->
+
           <plugin name="quadrotor_baro_sim" filename="libhector_gazebo_ros_baro.so">
             <updateRate>10.0</updateRate>
             <bodyName>base_link</bodyName>
@@ -52,14 +60,6 @@
             <gaussianNoise>0.0 0.0 0.0</gaussianNoise>
             <velocityDrift>0 0 0</velocityDrift>
             <velocityGaussianNoise>0.0 0.0 0.0</velocityGaussianNoise>
-          </plugin>
-
-          <plugin name="quadrotor_groundtruth_sim" filename="libgazebo_ros_p3d.so">
-            <updateRate>100.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <topicName>ground_truth/state</topicName>
-            <gaussianNoise>0.0</gaussianNoise>
-            <frameName>$(arg world_frame)</frameName>
           </plugin>
 
         </gazebo>

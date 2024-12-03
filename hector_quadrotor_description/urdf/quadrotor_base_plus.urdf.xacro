@@ -17,14 +17,14 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hector_quadrotor_description/meshes/quadrotor/quadrotor_CAD2.dae"/>
+          <mesh filename="package://hector_quadrotor_description/meshes/quadrotor/quadrotor_CAD2_visuals.dae"/>
         </geometry>
       </visual>
 
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hector_quadrotor_description/meshes/quadrotor/quadrotor_CAD2.stl"/>
+          <mesh filename="package://hector_quadrotor_description/meshes/quadrotor/quadrotor_CAD2_collision.stl"/>
         </geometry>
       </collision>
     </link>
